@@ -32,6 +32,15 @@
 
             {% block body %}{% endblock %}
         </div>
+                        <div class="navbar-nav ms-3">
+                    {% if app.user %}
+                        <span class="nav-link text-light">👤 {{ app.user.userIdentifier }}</span>
+                        <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                    {% else %}
+                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                        <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+                    {% endif %}
+                </div>
 
         <footer class="text-center py-4 text-muted mt-5">
             &copy; {{ "now"|date("Y") }} — TP Symfony 7.4
