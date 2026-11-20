@@ -60,6 +60,9 @@ class Article
       #[ORM\ManyToOne(inversedBy: "articles")]
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $categorie = null;
+
+      #[ORM\ManyToOne(inversedBy: 'articles')]
+      private ?User $auteurUser = null;
     public function __construct()
     {
         $this->dateCreation = new \DateTime();
@@ -137,6 +140,18 @@ class Article
         $this->categorie = $categorie;
 
          return $this;
+    }
+
+    public function getAuteurUser(): ?User
+    {
+        return $this->auteurUser;
+    }
+
+    public function setAuteurUser(?User $auteurUser): static
+    {
+        $this->auteurUser = $auteurUser;
+
+        return $this;
     }
 }
 
