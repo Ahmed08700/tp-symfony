@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ArticleRepository;
 use App\Form\ArticleType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 
 final class ArticlesController extends AbstractController
@@ -80,6 +81,7 @@ public function modifier(Article $article, Request $request, EntityManagerInterf
 }
 
 #[Route('/articles/{id}/supprimer', name: 'app_article_supprimer', requirements: ['id' => '\d+'], methods: ['POST'])]
+#[IsGranted('ROLE_USER')]
 public function supprimer(Article $article, Request $request, EntityManagerInterface $em): Response
 {
     // Vérification du token CSRF pour la sécurité
